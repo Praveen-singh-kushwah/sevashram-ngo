@@ -22,7 +22,7 @@ const HeroSection = () => {
 
   return (
     <section
-      className="relative w-full min-h-screen flex items-center justify-center overflow-hidden top-10"
+      className="relative w-full min-h-screen flex items-center justify-center overflow-hidden"
     >
       {/* Background Crossfade */}
       <div className="absolute inset-0">

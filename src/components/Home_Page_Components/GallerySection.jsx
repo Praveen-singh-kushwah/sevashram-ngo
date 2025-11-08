@@ -39,49 +39,49 @@ const GallerySection = () => {
   const galleryImages = [
     {
       id: 1,
-      src: '/images/home/gallery/image-1.jpg',
+      src: '/images/home/programs/education.jpeg',
       caption: "Children's Day 2025",
       alt: 'Children celebrating at Sevashram'
     },
     {
       id: 2,
-      src: '/images/home/gallery/image-2.jpg',
+      src: '/images/home/programs/education.jpeg',
       caption: 'Learning Together',
       alt: 'Children studying in classroom'
     },
     {
       id: 3,
-      src: '/images/home/gallery/image-3.jpg',
+      src: '/images/home/programs/education.jpeg',
       caption: 'Art Workshop',
       alt: 'Children creating art'
     },
     {
       id: 4,
-      src: '/images/home/gallery/image-4.jpg',
+      src: '/images/home/programs/education.jpeg',
       caption: 'Sports Day',
       alt: 'Children playing sports'
     },
     {
       id: 5,
-      src: '/images/home/gallery/image-5.jpg',
+      src: '/images/home/programs/education.jpeg',
       caption: 'Music Class',
       alt: 'Children learning music'
     },
     {
       id: 6,
-      src: '/images/home/gallery/image-6.jpg',
+      src: '/images/home/programs/education.jpeg',
       caption: 'Community Gathering',
       alt: 'Community event at Sevashram'
     },
     {
       id: 7,
-      src: '/images/home/gallery/image-7.jpg',
+      src: '/images/home/programs/education.jpeg',
       caption: 'Daily Activities',
       alt: 'Children in daily activities'
     },
     {
       id: 8,
-      src: '/images/home/gallery/image-8.jpg',
+      src: '/images/home/programs/education.jpeg',
       caption: 'Volunteer Program',
       alt: 'Volunteers with children'
     }
