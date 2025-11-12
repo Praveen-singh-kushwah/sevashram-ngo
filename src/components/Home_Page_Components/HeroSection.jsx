@@ -8,6 +8,8 @@ const HeroSection = () => {
     "/images/home/hero/hero-bg-1.jpg",
     "/images/home/hero/hero-bg-2.jpg",
     "/images/home/hero/hero-bg-3.jpg",
+    "/images/home/hero/hero-bg-4.jpg",
+    "/images/home/hero/hero-bg-5.jpg",
   ];
   const [current, setCurrent] = useState(0);
   const intervalMs = 2000; // time each image shows

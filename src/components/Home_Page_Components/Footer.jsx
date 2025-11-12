@@ -236,28 +236,12 @@ const Footer = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="flex flex-col md:flex-row items-center justify-between gap-4"
+          className="flex flex-col md:flex-row items-center justify-center gap-4"
         >
           {/* Copyright */}
-          <p className="font-open-sans text-sm text-[#E2E8F0] text-center md:text-left">
+          <p className="font-open-sans text-sm text-[#E2E8F0] text-center md:text-center">
             © 2025 Sevashram NGO. All Rights Reserved.
           </p>
-
-          {/* Legal Links */}
-          <div className="flex items-center gap-6">
-            <Link
-              to="/privacy"
-              className="font-open-sans text-sm text-[#E2E8F0] hover:text-[#FDE68A] transition-colors duration-300"
-            >
-              Privacy Policy
-            </Link>
-            <Link
-              to="/terms"
-              className="font-open-sans text-sm text-[#E2E8F0] hover:text-[#FDE68A] transition-colors duration-300"
-            >
-              Terms of Use
-            </Link>
-          </div>
         </motion.div>
       </div>
 

@@ -25,7 +25,6 @@ const Header = () => {
     { name: "Home", path: "/" },
     { name: "About Us", path: "/about" },
     { name: "Programs", path: "/programs" },
-    { name: "Impact", path: "/impact" },
     { name: "Get Involved", path: "/get-involved" },
     { name: "Events", path: "/events" },
     { name: "Gallery", path: "/gallery" },
@@ -49,18 +48,15 @@ const Header = () => {
         }
       `}
     >
-      <div className="container mx-auto px-4 lg:px-8 max-w-[1280px]">
+      <div className="container mx-auto px-4 lg:px-8 max-w-[1400px]">
         <div className="flex items-center justify-between">
           {/* Logo & Brand */}
           <Link to="/" className="flex items-center gap-2 group">
-            <div className="w-12 h-10 bg-gradient-to-br from-[#1E3A8A] to-[#F9A826] rounded-full flex items-center justify-center text-white font-bold text-xl transition-transform group-hover:scale-105">
-              S
-            </div>
-            <div className="flex flex-col">
-              <h1 className="text-xl font-heading font-bold text-[#1E3A8A] leading-tight">
-                Sevashram
-              </h1>
-            </div>
+            <img 
+              src="/images/logo/logo.png" 
+              alt="Sevashram Logo" 
+              className="h-14 relative bottom-1 object-contain transition-transform group-hover:scale-105"
+            />
           </Link>
 
           {/* Desktop Navigation */}
