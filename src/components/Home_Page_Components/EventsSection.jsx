@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Calendar, MapPin, Users } from 'lucide-react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import { Link } from 'react-router-dom';
 
 const EventsSection = () => {
   // Animation variants
@@ -111,12 +112,12 @@ const EventsSection = () => {
         >
           {/* Title */}
           <h2 className="font-poppins font-semibold text-[#1E3A8A] text-2xl md:text-3xl lg:text-4xl leading-tight tracking-wide mb-4">
-            Events and Activities
+            Our Impact and Activities
           </h2>
 
           {/* Subtitle */}
           <p className="font-open-sans text-[#4B5563] text-base md:text-lg leading-relaxed max-w-3xl mx-auto">
-            Stay updated on our latest initiatives, celebrations, and community programs.
+            Explore how our initiatives, celebrations, and programs are creating meaningful change.
           </p>
         </motion.div>
 
@@ -133,7 +134,7 @@ const EventsSection = () => {
           ))}
         </motion.div>
 
-        {/* View All Events Button */}
+        {/* View Impact Button */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -141,13 +142,15 @@ const EventsSection = () => {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="text-center"
         >
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center gap-2 bg-[#F9A826] text-white font-poppins font-semibold px-8 py-3 rounded-lg hover:bg-[#F59E0B] transition-all duration-300 shadow-md hover:shadow-lg"
-          >
-            View All Events
-          </motion.button>
+          <Link to="/impact">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-flex items-center gap-2 bg-[#F9A826] text-white font-poppins font-semibold px-8 py-3 rounded-lg hover:bg-[#F59E0B] transition-all duration-300 shadow-md hover:shadow-lg"
+            >
+              Explore Our Impact
+            </motion.button>
+          </Link>
         </motion.div>
       </div>
     </section>

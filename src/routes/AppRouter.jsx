@@ -5,6 +5,8 @@ import About from "../pages/About";
 import Gallery from "../pages/Gallery";
 import EventGallery from "../pages/EventGallery";
 import Contact from "../pages/Contact";
+import Impact from "../pages/Impact";
+import StoryDetail from "../pages/StoryDetail";
 
 const AppRouter = () => {
   return (
@@ -13,6 +15,8 @@ const AppRouter = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/impact" element={<Impact />} />
+          <Route path="/impact/:slug" element={<StoryDetail />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/gallery/:slug" element={<EventGallery />} />
           <Route path="/contact" element={<Contact />} />
