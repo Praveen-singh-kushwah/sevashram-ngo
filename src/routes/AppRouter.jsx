@@ -1,4 +1,5 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 import MainLayout from "../layouts/MainLayout";
 import Home from "../pages/Home";
 import About from "../pages/About";
@@ -10,10 +11,22 @@ import StoryDetail from "../pages/StoryDetail";
 import Programs from "../pages/Programs";
 import ProgramDetail from "../pages/ProgramDetail";
 
+// Scroll to top on route change
+const ScrollToTop = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  }, [location.pathname]);
+
+  return null;
+};
+
 const AppRouter = () => {
   return (
     <Router>
       <MainLayout>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
