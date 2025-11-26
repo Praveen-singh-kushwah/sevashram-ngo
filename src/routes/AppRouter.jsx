@@ -7,6 +7,8 @@ import EventGallery from "../pages/EventGallery";
 import Contact from "../pages/Contact";
 import Impact from "../pages/Impact";
 import StoryDetail from "../pages/StoryDetail";
+import Programs from "../pages/Programs";
+import ProgramDetail from "../pages/ProgramDetail";
 
 const AppRouter = () => {
   return (
@@ -15,6 +17,8 @@ const AppRouter = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/programs" element={<Programs />} />
+          <Route path="/programs/:slug" element={<ProgramDetail />} />
           <Route path="/impact" element={<Impact />} />
           <Route path="/impact/:slug" element={<StoryDetail />} />
           <Route path="/gallery" element={<Gallery />} />

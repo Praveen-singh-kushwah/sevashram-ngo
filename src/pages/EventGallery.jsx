@@ -75,11 +75,24 @@ const EventGallery = () => {
 
   if (!event) return null;
 
-  const title = event.title || "Untitled Event";
-  const date = event.date || "";
-  const description = event.description || [];
-  const coverUrl = getMediaUrl(event.cover?.url);
-  const eventImages = event.event_images || [];
+  // Normalize Strapi response (supports both flat and attributes-based shapes)
+  const attrs = event.attributes || event || {};
+
+  const title = attrs.title || "Untitled Event";
+  const date = attrs.date || "";
+  const description = attrs.description || [];
+  const coverUrl = getMediaUrl(
+    attrs.cover?.data?.attributes?.url || attrs.cover?.url
+  );
+
+  // Support event_images coming either as a flat array or as .data from Strapi
+  const rawEventImages = Array.isArray(attrs.event_images)
+    ? attrs.event_images
+    : Array.isArray(attrs.event_images?.data)
+    ? attrs.event_images.data
+    : [];
+
+  const eventImages = rawEventImages.map((img) => img.attributes || img || {});
 
   // Extract text from rich text description
   const descriptionText = Array.isArray(description)
@@ -94,11 +107,32 @@ const EventGallery = () => {
     day: 'numeric'
   }) : "";
 
+  // Helper to extract first media object from Image field (can be array or single)
+  const getFirstMedia = (imageField) => {
+    if (Array.isArray(imageField)) {
+      return imageField[0] || {};
+    }
+    if (imageField?.data?.attributes) {
+      return imageField.data.attributes;
+    }
+    return imageField || {};
+  };
+
   // Prepare images for lightbox
-  const lightboxImages = eventImages.map((eventImg, index) => ({
-    url: getMediaUrl(eventImg.Image?.url),
-    alt: eventImg.Image?.alternativeText || eventImg.Caption || `${title} - Image ${index + 1}`
-  }));
+  const lightboxImages = eventImages
+    .map((eventImg, index) => {
+      const media = getFirstMedia(eventImg.Image || eventImg.image);
+      const url = getMediaUrl(media.url);
+
+      return {
+        url,
+        alt:
+          media.alternativeText ||
+          eventImg.Caption ||
+          `${title} - Image ${index + 1}`,
+      };
+    })
+    .filter((img) => img.url);
 
   return (
     <>
@@ -181,8 +215,13 @@ const EventGallery = () => {
               className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"
             >
               {eventImages.map((eventImg, index) => {
-                const imageUrl = getMediaUrl(eventImg.Image?.url);
-                const altText = eventImg.Image?.alternativeText || eventImg.Caption || `${title} - Image ${index + 1}`;
+                const media = getFirstMedia(eventImg.Image || eventImg.image);
+                const imageUrl = getMediaUrl(media.url);
+                const altText =
+                  media.alternativeText ||
+                  eventImg.Caption ||
+                  `${title} - Image ${index + 1}`;
+                if (!imageUrl) return null;
                 return (
                   <motion.div
                     key={eventImg.id || index}

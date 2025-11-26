@@ -29,6 +29,52 @@ export async function fetchEventBySlug(slug) {
   return json?.data?.[0] || null;
 }
 
+// Program gallery images via separate collection (fetch all, filter by id on frontend)
+export async function fetchProgramImages() {
+  const url = new URL(`${STRAPI_BASE_URL}/api/program-images`);
+  url.searchParams.set("populate", "image");
+
+  const res = await fetch(url.toString());
+  if (!res.ok) {
+    throw new Error(`Failed to fetch program images: ${res.status}`);
+  }
+  const json = await res.json();
+  return json;
+}
+
+// Programs API - list (for grids and related programs)
+export async function fetchPrograms({ page = 1, pageSize = 12 } = {}) {
+  const url = new URL(`${STRAPI_BASE_URL}/api/programs`);
+  url.searchParams.set("pagination[page]", String(page));
+  url.searchParams.set("pagination[pageSize]", String(pageSize));
+  url.searchParams.set("fields[0]", "title");
+  url.searchParams.set("fields[1]", "slug");
+  url.searchParams.set("fields[2]", "shortDescription");
+  url.searchParams.set("populate", "cover");
+
+  const res = await fetch(url.toString());
+  if (!res.ok) {
+    throw new Error(`Failed to fetch programs: ${res.status}`);
+  }
+  const json = await res.json();
+  return json;
+}
+
+// Program detail by slug (full detail)
+export async function fetchProgramBySlug(slug) {
+  const url = new URL(`${STRAPI_BASE_URL}/api/programs`);
+  url.searchParams.set("filters[slug][$eq]", slug);
+  // Use full populate to avoid 400 errors and include cover + program_images
+  url.searchParams.set("populate", "*");
+
+  const res = await fetch(url.toString());
+  if (!res.ok) {
+    throw new Error(`Failed to fetch program: ${res.status}`);
+  }
+  const json = await res.json();
+  return json?.data?.[0] || null;
+}
+
 // Story Images API functions - for the grid page
 export async function fetchStoryImages({ page = 1, pageSize = 9 } = {}) {
   const url = new URL(`${STRAPI_BASE_URL}/api/story-images`);
