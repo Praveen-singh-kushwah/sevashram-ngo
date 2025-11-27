@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { fetchImpactStories, getMediaUrl } from "../utils/api";
 import StoryHero from "../components/Impact_Page_Components/StoryHero";
+import ImpactStats from "../components/Home_Page_Components/ImpactStats";
 
 const StoryDetail = () => {
   const { slug } = useParams();
@@ -211,6 +212,8 @@ const StoryDetail = () => {
           </div>
         </div>
       </motion.section>
+
+      <ImpactStats />
     </>
   );
 };

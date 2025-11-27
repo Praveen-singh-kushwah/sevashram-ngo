@@ -37,7 +37,7 @@ const StoriesSection = () => {
     },
     {
       id: 3,
-      image: '/images/home/stories/rohit.webp',
+      image: '/images/home/stories/aditya.avif',
       title: "Rohit's Dream — Aspiring to Heal",
       description: "Once without a home, Rohit now studies to become a doctor, inspiring his younger peers.",
       link: '/stories/rohit'

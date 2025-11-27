@@ -158,14 +158,6 @@ const HeroSection = () => {
               Years of Service
             </p>
           </div>
-          <div>
-            <h3 className="text-3xl font-heading font-bold text-primary">
-              0
-            </h3>
-            <p className="text-gray-200 text-sm sm:text-base">
-              Government Aid
-            </p>
-          </div>
         </motion.div>
       </div>
     </section>

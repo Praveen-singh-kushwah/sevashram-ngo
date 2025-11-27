@@ -19,9 +19,9 @@ const Home = () => {
       <ProgramsSection />
       <ImpactStats />
       <StoriesSection />
-      <EventsSection />
+      {/* <EventsSection /> */}
       <HelpSection />
-      <GallerySection />
+      {/* <GallerySection /> */}
       <TestimonialsSection />
       <DonateBanner />
       {/* <Footer /> */}

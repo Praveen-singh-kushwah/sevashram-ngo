@@ -13,8 +13,8 @@ const About = () => {
       <OurStorySection />
       <VisionMissionSection />
       <FounderMessageSection />
-      <OurTeamSection />
       <TimelineSection />
+      <OurTeamSection />
       <CTASection />
     </>
   );
