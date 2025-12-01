@@ -126,4 +126,31 @@ export function getMediaUrl(path) {
   if (path.startsWith("http")) return path;
   return `${STRAPI_BASE_URL}${path}`;
 }
- 
+
+// Blog API functions
+export async function fetchBlogList({ page = 1, pageSize = 9 } = {}) {
+  // Build URL with exact format that works with your Strapi - NO leading spaces
+  const queryString = `fields[0]=Title&fields[1]=Slug&fields[2]=shortDescription&fields[3]=authorName&populate[coverCard][populate]=*&pagination[page]=${page}&pagination[pageSize]=${pageSize}`;
+  const url = `${STRAPI_BASE_URL}/api/blogs?${queryString}`;
+
+  const res = await fetch(url);
+
+  if (!res.ok) {
+    throw new Error(`Failed to fetch blog list: ${res.status}`);
+  }
+  const json = await res.json();
+  return json;
+}
+
+export async function fetchBlogBySlug(slug) {
+  const url = new URL(`${STRAPI_BASE_URL}/api/blogs`);
+  url.searchParams.set("filters[Slug][$eq]", slug);
+  url.searchParams.set("populate", "*");
+
+  const res = await fetch(url.toString());
+  if (!res.ok) {
+    throw new Error(`Failed to fetch blog: ${res.status}`);
+  }
+  const json = await res.json();
+  return json?.data?.[0] || null;
+}

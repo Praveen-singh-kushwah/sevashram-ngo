@@ -10,6 +10,8 @@ import Impact from "../pages/Impact";
 import StoryDetail from "../pages/StoryDetail";
 import Programs from "../pages/Programs";
 import ProgramDetail from "../pages/ProgramDetail";
+import Blog from "../pages/Blog";
+import BlogDetail from "../pages/BlogDetail";
 
 // Scroll to top on route change
 const ScrollToTop = () => {
@@ -36,6 +38,8 @@ const AppRouter = () => {
           <Route path="/impact/:slug" element={<StoryDetail />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/gallery/:slug" element={<EventGallery />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<BlogDetail />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </MainLayout>
