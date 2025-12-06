@@ -135,7 +135,6 @@ const BlogDetail = () => {
     return (
       <div className="min-h-screen bg-[#F8FAFC] flex items-center justify-center">
         <motion.div
-          animate={{ rotate: 360 }}
           transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
           className="w-12 h-12 border-4 border-[#F9A826] border-t-[#1E3A8A] rounded-full"
         />
@@ -199,7 +198,7 @@ const BlogDetail = () => {
         transition={{ duration: 0.6, delay: 0.2 }}
         className="py-12 md:py-20"
       >
-        <div className="container mx-auto px-6 md:px-12 max-w-[800px]">
+        <div className="container mx-auto px-6 md:px-12 max-w-[1200px]">
           {/* Title */}
           <h1 className="text-4xl md:text-5xl font-heading font-bold text-[#1E3A8A] mb-6 leading-tight">
             {attributes.Title}
