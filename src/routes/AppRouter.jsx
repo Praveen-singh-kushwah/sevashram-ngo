@@ -12,6 +12,9 @@ import Programs from "../pages/Programs";
 import ProgramDetail from "../pages/ProgramDetail";
 import Blog from "../pages/Blog";
 import BlogDetail from "../pages/BlogDetail";
+import GetInvolved from "../pages/GetInvolved";
+import Donate from "../pages/Donate";
+import Volunteer from "../pages/Volunteer";
 
 // Scroll to top on route change
 const ScrollToTop = () => {
@@ -40,6 +43,9 @@ const AppRouter = () => {
           <Route path="/gallery/:slug" element={<EventGallery />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogDetail />} />
+          <Route path="/get-involved" element={<GetInvolved />} />
+          <Route path="/donate/*" element={<Donate />} />
+          <Route path="/volunteer" element={<Volunteer />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </MainLayout>

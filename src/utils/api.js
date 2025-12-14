@@ -1,4 +1,4 @@
-export const STRAPI_BASE_URL = import.meta.env.VITE_STRAPI_URL || "http://localhost:1337";
+export const STRAPI_BASE_URL = import.meta.env.VITE_STRAPI_URL;
 
 export async function fetchEvents({ page = 1, pageSize = 9 } = {}) {
   const url = new URL(`${STRAPI_BASE_URL}/api/events`);
