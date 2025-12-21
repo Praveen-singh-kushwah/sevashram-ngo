@@ -1,9 +1,12 @@
-import React, { useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Quote, ChevronLeft, ChevronRight } from 'lucide-react';
+import { fetchTestimonials } from "../../utils/testimonialApi";
 
 const TestimonialsSection = () => {
   const scrollContainerRef = useRef(null);
+  const [testimonials, setTestimonials] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   // Animation variants
   const containerVariants = {
@@ -18,12 +21,12 @@ const TestimonialsSection = () => {
   };
 
   const cardVariants = {
-    hidden: { 
-      opacity: 0, 
-      y: 30 
+    hidden: {
+      opacity: 0,
+      y: 30
     },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
       transition: {
         duration: 0.5,
@@ -32,61 +35,61 @@ const TestimonialsSection = () => {
     }
   };
 
-  // Testimonials data
-  const testimonials = [
-    {
-      id: 1,
-      quote: "Visiting Sevashram changed how I see hope and resilience. The children are full of joy and gratitude, despite their challenges. It's truly inspiring.",
-      name: "Ramesh Patil",
-      role: "Volunteer, Pune",
-      image: "/images/home/testimonials/ramesh-patil.jpg"
-    },
-    {
-      id: 2,
-      quote: "Supporting Sevashram has been the most fulfilling decision of my life. Knowing that my contribution helps provide education and care to these wonderful children brings me immense joy.",
-      name: "Priya Sharma",
-      role: "Monthly Donor, Mumbai",
-      image: "/images/home/testimonials/priya-sharma.jpg"
-    },
-    {
-      id: 3,
-      quote: "The dedication and love shown by the Sevashram team is remarkable. Every child here is treated with dignity and given opportunities to thrive. I'm proud to be associated with this mission.",
-      name: "Dr. Anil Kumar",
-      role: "Medical Volunteer, Delhi",
-      image: "/images/home/testimonials/anil-kumar.jpg"
-    },
-    {
-      id: 4,
-      quote: "As a teacher volunteer, I've witnessed firsthand the transformation in these children. Their eagerness to learn and grow is heartwarming. Sevashram is truly making a difference.",
-      name: "Meera Desai",
-      role: "Education Volunteer, Bangalore",
-      image: "/images/home/testimonials/meera-desai.jpg"
-    },
-    {
-      id: 5,
-      quote: "Sponsoring a child through Sevashram has been an incredible journey. Seeing their progress and achievements makes every contribution worthwhile. This organization is transparent and trustworthy.",
-      name: "Rajesh Mehta",
-      role: "Child Sponsor, Ahmedabad",
-      image: "/images/home/testimonials/rajesh-mehta.jpg"
-    },
-    {
-      id: 6,
-      quote: "The warmth and care at Sevashram is palpable. Every visit reminds me of the power of compassion and community. These children deserve all the support we can give them.",
-      name: "Anjali Reddy",
-      role: "Corporate Donor, Hyderabad",
-      image: "/images/home/testimonials/anjali-reddy.jpg"
-    }
-  ];
+  // // Testimonials data
+  // const testimonials = [
+  //   {
+  //     id: 1,
+  //     quote: "Visiting Sevashram changed how I see hope and resilience. The children are full of joy and gratitude, despite their challenges. It's truly inspiring.",
+  //     name: "Ramesh Patil",
+  //     role: "Volunteer, Pune",
+  //     image: "/images/home/testimonials/ramesh-patil.jpg"
+  //   },
+  //   {
+  //     id: 2,
+  //     quote: "Supporting Sevashram has been the most fulfilling decision of my life. Knowing that my contribution helps provide education and care to these wonderful children brings me immense joy.",
+  //     name: "Priya Sharma",
+  //     role: "Monthly Donor, Mumbai",
+  //     image: "/images/home/testimonials/priya-sharma.jpg"
+  //   },
+  //   {
+  //     id: 3,
+  //     quote: "The dedication and love shown by the Sevashram team is remarkable. Every child here is treated with dignity and given opportunities to thrive. I'm proud to be associated with this mission.",
+  //     name: "Dr. Anil Kumar",
+  //     role: "Medical Volunteer, Delhi",
+  //     image: "/images/home/testimonials/anil-kumar.jpg"
+  //   },
+  //   {
+  //     id: 4,
+  //     quote: "As a teacher volunteer, I've witnessed firsthand the transformation in these children. Their eagerness to learn and grow is heartwarming. Sevashram is truly making a difference.",
+  //     name: "Meera Desai",
+  //     role: "Education Volunteer, Bangalore",
+  //     image: "/images/home/testimonials/meera-desai.jpg"
+  //   },
+  //   {
+  //     id: 5,
+  //     quote: "Sponsoring a child through Sevashram has been an incredible journey. Seeing their progress and achievements makes every contribution worthwhile. This organization is transparent and trustworthy.",
+  //     name: "Rajesh Mehta",
+  //     role: "Child Sponsor, Ahmedabad",
+  //     image: "/images/home/testimonials/rajesh-mehta.jpg"
+  //   },
+  //   {
+  //     id: 6,
+  //     quote: "The warmth and care at Sevashram is palpable. Every visit reminds me of the power of compassion and community. These children deserve all the support we can give them.",
+  //     name: "Anjali Reddy",
+  //     role: "Corporate Donor, Hyderabad",
+  //     image: "/images/home/testimonials/anjali-reddy.jpg"
+  //   }
+  // ];
 
   // Scroll functions
   const scroll = (direction) => {
     if (scrollContainerRef.current) {
       const scrollAmount = 550;
-      const newScrollPosition = 
-        direction === 'left' 
+      const newScrollPosition =
+        direction === 'left'
           ? scrollContainerRef.current.scrollLeft - scrollAmount
           : scrollContainerRef.current.scrollLeft + scrollAmount;
-      
+
       scrollContainerRef.current.scrollTo({
         left: newScrollPosition,
         behavior: 'smooth'
@@ -94,11 +97,39 @@ const TestimonialsSection = () => {
     }
   };
 
+  useEffect(() => {
+    const loadTestimonials = async () => {
+      try {
+        const res = await fetchTestimonials();
+
+        const formatted = res.data.map((item) => ({
+          id: item.id,
+          quote: item.quote,
+          name: item.name,
+          role: item.role,
+          image: item.image?.url
+            ? import.meta.env.VITE_STRAPI_URL + item.image.url
+            : null,
+        }));
+
+        setTestimonials(formatted);
+      } catch (err) {
+        console.error("Failed to load testimonials", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadTestimonials();
+  }, []);
+
+
+
   return (
     <section className="relative bg-[#FFF7ED] py-20 md:py-20 overflow-hidden">
       {/* Container */}
       <div className="max-w-7xl mx-auto px-6 md:px-12">
-        
+
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -124,14 +155,14 @@ const TestimonialsSection = () => {
           <div className="hidden lg:block">
             <button
               onClick={() => scroll('left')}
-              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-12 h-12 rounded-full bg-[#F9A826] text-white flex items-center justify-center hover:bg-[#F59E0B] transition-all duration-300 shadow-lg hover:scale-110"
+              className="absolute left-[-100px] top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-12 h-12 rounded-full bg-[#F9A826] text-white flex items-center justify-center hover:bg-[#F59E0B] transition-all duration-300 shadow-lg hover:scale-110"
               aria-label="Previous testimonial"
             >
               <ChevronLeft className="w-6 h-6" />
             </button>
             <button
               onClick={() => scroll('right')}
-              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-12 h-12 rounded-full bg-[#F9A826] text-white flex items-center justify-center hover:bg-[#F59E0B] transition-all duration-300 shadow-lg hover:scale-110"
+              className="absolute right-[-100px] top-1/2 -translate-y-1/2 translate-x-4 z-10 w-12 h-12 rounded-full bg-[#F9A826] text-white flex items-center justify-center hover:bg-[#F59E0B] transition-all duration-300 shadow-lg hover:scale-110"
               aria-label="Next testimonial"
             >
               <ChevronRight className="w-6 h-6" />
@@ -140,26 +171,23 @@ const TestimonialsSection = () => {
 
           {/* Testimonials Carousel */}
           <motion.div
+            key={testimonials.length} // IMPORTANT
             variants={containerVariants}
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
+            animate={!loading && testimonials.length > 0 ? "visible" : "hidden"}
             ref={scrollContainerRef}
             className="flex gap-6 overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory pb-4"
-            style={{
-              scrollbarWidth: 'none',
-              msOverflowStyle: 'none',
-              WebkitOverflowScrolling: 'touch'
-            }}
           >
-            {testimonials.map((testimonial, index) => (
-              <TestimonialCard 
-                key={testimonial.id} 
+
+            {!loading && testimonials.length > 0 && testimonials.map((testimonial, index) => (
+              <TestimonialCard
+                key={testimonial.id}
                 testimonial={testimonial}
                 index={index}
                 variants={cardVariants}
               />
             ))}
+
           </motion.div>
 
           {/* Scroll Indicators - Mobile */}

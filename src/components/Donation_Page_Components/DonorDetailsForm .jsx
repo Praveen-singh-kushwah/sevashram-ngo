@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight, Shield, Lock, Heart } from 'lucide-react';
+import { submitDonorDetails } from "../../utils/donationApi";
 
 const DonorDetailsForm = () => {
   const [formData, setFormData] = useState({
@@ -48,13 +49,27 @@ const DonorDetailsForm = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validateForm()) {
-      setIsSubmitting(true);
-      setTimeout(() => navigate('/donate/payment'), 1000);
+
+    if (!validateForm()) return;
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await submitDonorDetails(formData);
+
+      const donationRef = response?.data?.documentId;
+
+      navigate(`/donate/payment?ref=${donationRef}`);
+    } catch (error) {
+      console.error("Donation submission failed:", error);
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-orange-50 py-8 px-4 sm:py-12 sm:px-6 lg:py-16 lg:px-8">
@@ -123,9 +138,8 @@ const DonorDetailsForm = () => {
                     name="fullName"
                     value={formData.fullName}
                     onChange={handleChange}
-                    className={`w-full h-12 px-4 rounded-lg border-2 ${
-                      errors.fullName ? 'border-red-400' : 'border-gray-300'
-                    }`}
+                    className={`w-full h-12 px-4 rounded-lg border-2 ${errors.fullName ? 'border-red-400' : 'border-gray-300'
+                      }`}
                     placeholder="John Doe"
                   />
                   {errors.fullName && <p className="text-red-500 text-xs mt-1.5">{errors.fullName}</p>}
@@ -142,9 +156,8 @@ const DonorDetailsForm = () => {
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      className={`w-full h-12 px-4 rounded-lg border-2 ${
-                        errors.email ? 'border-red-400' : 'border-gray-300'
-                      }`}
+                      className={`w-full h-12 px-4 rounded-lg border-2 ${errors.email ? 'border-red-400' : 'border-gray-300'
+                        }`}
                       placeholder="your@email.com"
                     />
                     {errors.email && <p className="text-red-500 text-xs mt-1.5">{errors.email}</p>}
@@ -159,9 +172,8 @@ const DonorDetailsForm = () => {
                       name="phone"
                       value={formData.phone}
                       onChange={handleChange}
-                      className={`w-full h-12 px-4 rounded-lg border-2 ${
-                        errors.phone ? 'border-red-400' : 'border-gray-300'
-                      }`}
+                      className={`w-full h-12 px-4 rounded-lg border-2 ${errors.phone ? 'border-red-400' : 'border-gray-300'
+                        }`}
                       placeholder="+91 98765 43210"
                     />
                     {errors.phone && <p className="text-red-500 text-xs mt-1.5">{errors.phone}</p>}
@@ -177,9 +189,8 @@ const DonorDetailsForm = () => {
                     name="country"
                     value={formData.country}
                     onChange={handleChange}
-                    className={`w-full h-12 px-4 rounded-lg border-2 ${
-                      errors.country ? 'border-red-400' : 'border-gray-300'
-                    }`}
+                    className={`w-full h-12 px-4 rounded-lg border-2 ${errors.country ? 'border-red-400' : 'border-gray-300'
+                      }`}
                   >
                     <option value="">Select Country</option>
                     <option value="India">India</option>

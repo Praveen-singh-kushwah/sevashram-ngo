@@ -60,7 +60,7 @@ const WaysToHelpSection = () => {
       description: "Explore CSR and corporate collaboration opportunities.",
       bgColor: "bg-purple-50",
       hoverColor: "hover:bg-purple-50/80",
-      onClick: () => { /* Handle navigation */ },
+      onClick: () => navigate('/partner'),
     },
     {
       id: 3,
