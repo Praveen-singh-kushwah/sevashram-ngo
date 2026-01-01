@@ -196,9 +196,8 @@ const DonationPaymentPage = () => {
                 onChange={handleAmountChange}
                 onBlur={validateAmount}
                 placeholder="500"
-                className={`w-full h-14 pl-10 pr-4 rounded-xl border-2 ${
-                  error ? "border-red-400" : "border-gray-300"
-                }`}
+                className={`w-full h-14 pl-10 pr-4 rounded-xl border-2 ${error ? "border-red-400" : "border-gray-300"
+                  }`}
               />
             </div>
             {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
@@ -221,11 +220,10 @@ const DonationPaymentPage = () => {
           <button
             onClick={handleProceedToPay}
             disabled={isProcessing}
-            className={`w-full h-14 rounded-xl font-semibold text-white transition ${
-              !isProcessing
+            className={`w-full h-14 rounded-xl font-semibold text-white transition ${!isProcessing
                 ? "bg-orange-500 hover:bg-orange-600"
                 : "bg-gray-300 cursor-not-allowed"
-            }`}
+              }`}
           >
             {isProcessing ? "Redirecting to Payment..." : `Proceed to Pay ₹${amount || ""}`}
             <ArrowRight className="inline ml-2" />

@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 
@@ -14,6 +15,9 @@ const HeroSection = () => {
   const [current, setCurrent] = useState(0);
   const intervalMs = 2000; // time each image shows
   const fadeDuration = 1.2; // seconds
+
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -90,6 +94,7 @@ const HeroSection = () => {
           <motion.button
             whileHover={{ scale: 1.05, boxShadow: "0 10px 24px rgba(0,0,0,0.18)" }}
             whileTap={{ scale: 0.95 }}
+            onClick={() => navigate("/donate")}
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className="
               bg-[#F9A826] text-white px-8 py-3 rounded-md
@@ -106,6 +111,7 @@ const HeroSection = () => {
           <motion.button
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.97 }}
+            onClick={() => navigate("/volunteer")}
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className="
               bg-white text-[#F9A826] px-8 py-3 rounded-md
@@ -122,6 +128,7 @@ const HeroSection = () => {
           <motion.button
             whileHover={{ scale: 1.05, boxShadow: "0 10px 24px rgba(0,0,0,0.18)" }}
             whileTap={{ scale: 0.95 }}
+            onClick={() => navigate("/impact")}
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className="
               bg-[#F9A826] text-white px-8 py-3 rounded-md

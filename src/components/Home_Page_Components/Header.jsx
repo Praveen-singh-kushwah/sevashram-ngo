@@ -1,11 +1,13 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
+
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   // Scroll detection for navbar shadow/shrink effect
   useEffect(() => {
@@ -40,10 +42,9 @@ const Header = () => {
       transition={{ duration: 0.6, ease: "easeOut" }}
       className={`
         bg-white fixed w-full z-50 transition-all duration-300
-        ${
-          isScrolled
-            ? "shadow-lg py-3"
-            : "shadow-md py-4"
+        ${isScrolled
+          ? "shadow-lg py-3"
+          : "shadow-md py-4"
         }
       `}
     >
@@ -51,9 +52,9 @@ const Header = () => {
         <div className="flex items-center justify-between">
           {/* Logo & Brand */}
           <Link to="/" className="flex items-center gap-2 group">
-            <img 
-              src="/images/logo/logo.png" 
-              alt="Sevashram Logo" 
+            <img
+              src="/images/logo/logo.png"
+              alt="Sevashram Logo"
               className="h-14 relative bottom-1 object-contain transition-transform group-hover:scale-105"
             />
           </Link>
@@ -67,10 +68,9 @@ const Header = () => {
                 className={`
                   relative px-2 py-2 font-heading font-medium text-[14px] tracking-wide
                   transition-colors duration-300 group
-                  ${
-                    isActive(link.path)
-                      ? "text-[#1E3A8A]"
-                      : "text-[#1F2937] hover:text-[#F9A826]"
+                  ${isActive(link.path)
+                    ? "text-[#1E3A8A]"
+                    : "text-[#1F2937] hover:text-[#F9A826]"
                   }
                 `}
               >
@@ -97,6 +97,7 @@ const Header = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
+              onClick={() => navigate("/donate")}
               transition={{ duration: 0.3, ease: "easeInOut" }}
               className="
                 bg-[#F9A826] text-white px-6 py-2.5 rounded-lg
@@ -114,6 +115,7 @@ const Header = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
+              onClick={() => navigate("/volunteer")}
               transition={{ duration: 0.3, ease: "easeInOut" }}
               className="
                 bg-transparent border-[1.5px] border-[#1E3A8A] text-[#1E3A8A]
@@ -169,10 +171,9 @@ const Header = () => {
                   className={`
                     px-4 py-3 rounded-lg font-heading font-medium text-[14px]
                     transition-colors duration-300
-                    ${
-                      isActive(link.path)
-                        ? "bg-[#F9A826] text-white"
-                        : "text-[#1F2937] hover:bg-gray-100 hover:text-[#F9A826]"
+                    ${isActive(link.path)
+                      ? "bg-[#F9A826] text-white"
+                      : "text-[#1F2937] hover:bg-gray-100 hover:text-[#F9A826]"
                     }
                   `}
                 >
@@ -184,6 +185,7 @@ const Header = () => {
               <div className="flex flex-col gap-3 mt-4 pt-4 border-t border-gray-200">
                 <motion.button
                   whileTap={{ scale: 0.98 }}
+                  onClick={() => navigate("/donate")}
                   className="
                     bg-[#F9A826] text-white px-6 py-3 rounded-lg
                     font-heading font-semibold text-[16px]
@@ -194,6 +196,7 @@ const Header = () => {
                 </motion.button>
                 <motion.button
                   whileTap={{ scale: 0.98 }}
+                  onClick={() => navigate("/volunteer")}
                   className="
                     border-[1.5px] border-[#1E3A8A] text-[#1E3A8A]
                     px-6 py-3 rounded-lg font-heading font-semibold text-[16px]

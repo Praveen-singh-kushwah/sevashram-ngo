@@ -75,6 +75,27 @@ export async function fetchProgramBySlug(slug) {
   return json?.data?.[0] || null;
 }
 
+// Home Programs API (only selected programs)
+export async function fetchHomePrograms({ limit = 4 } = {}) {
+  const url = new URL(`${STRAPI_BASE_URL}/api/programs`);
+
+  url.searchParams.set("populate", "cover");
+  url.searchParams.set("filters[showOnHome][$eq]", "true");
+  url.searchParams.set("sort[0]", "homeOrder:asc");
+  url.searchParams.set("pagination[pageSize]", String(limit));
+  url.searchParams.set("fields[0]", "title");
+  url.searchParams.set("fields[1]", "slug");
+  url.searchParams.set("fields[2]", "shortDescription");
+
+  const res = await fetch(url.toString());
+  if (!res.ok) {
+    throw new Error(`Failed to fetch home programs: ${res.status}`);
+  }
+
+  return res.json();
+}
+
+
 // Story Images API functions - for the grid page
 export async function fetchStoryImages({ page = 1, pageSize = 9 } = {}) {
   const url = new URL(`${STRAPI_BASE_URL}/api/story-images`);
@@ -91,6 +112,42 @@ export async function fetchStoryImages({ page = 1, pageSize = 9 } = {}) {
   const json = await res.json();
   return json;
 }
+
+export async function fetchHomeStories({ limit = 5 } = {}) {
+  const url = new URL(`${STRAPI_BASE_URL}/api/story-images`);
+
+  url.searchParams.set("populate", "*");
+  url.searchParams.set("filters[showOnHome][$eq]", "true");
+  url.searchParams.set("sort[0]", "homeOrder:asc");
+  url.searchParams.set("pagination[pageSize]", String(limit));
+
+  const res = await fetch(url.toString());
+
+  if (!res.ok) {
+    throw new Error(`Failed to fetch home stories: ${res.status}`);
+  }
+
+  return res.json();
+}
+
+// Team Members API
+export async function fetchTeamMembers() {
+  const url = new URL(`${STRAPI_BASE_URL}/api/team-members`);
+
+  url.searchParams.set("populate", "photo");
+  url.searchParams.set("filters[isActive][$eq]", true);
+  url.searchParams.set("sort[0]", "order:asc");
+
+  const res = await fetch(url.toString());
+
+  if (!res.ok) {
+    throw new Error(`Failed to fetch team members: ${res.status}`);
+  }
+
+  return res.json();
+}
+
+
 
 // Impact Stories API functions - for individual story details
 export async function fetchImpactStories({ page = 1, pageSize = 9 } = {}) {

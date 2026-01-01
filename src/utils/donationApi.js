@@ -23,6 +23,7 @@ export async function submitDonorDetails(formData) {
     }),
   });
 
+  console.log("Submit Donor Details Response:", res);
   if (!res.ok) {
     const error = await res.json();
     throw new Error(error?.error?.message || "Failed to submit donor details");
@@ -63,8 +64,11 @@ export async function updateDonationPayment(documentId, payload) {
     }
   );
 
+  console.log("Update Donation Response:", res);
+
   if (!res.ok) {
     const error = await res.json();
+
     throw new Error(
       error?.error?.message || "Failed to update donation"
     );
@@ -90,7 +94,8 @@ export async function createRazorpayOrder({ donationRef, amount }) {
     throw new Error(error?.error?.message || "Failed to create Razorpay order");
   }
 
-  return res.json(); // { orderId, key } returned from backend
+  const response = await res.json();
+  return response; // Returns { data: { orderId, key } }
 }
 
 /* -----------------------------------------
@@ -108,5 +113,6 @@ export async function verifyRazorpayPayment(paymentDetails) {
     throw new Error(error?.error?.message || "Payment verification failed");
   }
 
-  return res.json(); // { success: true/false, donationRef }
+  return res.json(); // { success: true, donationRef }
 }
+
