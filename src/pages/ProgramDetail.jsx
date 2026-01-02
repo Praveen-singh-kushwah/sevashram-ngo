@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import HelpSection from "../components/Home_Page_Components/HelpSection";
 import {
   fetchProgramBySlug,
@@ -60,7 +62,7 @@ const ProgramDetail = () => {
               const base = item.attributes || item || {};
               if (!linkedIds.includes(item.id)) return;
 
-              const imageData = base.image; // array of media
+              const imageData = base.image;
               const imageArray = Array.isArray(imageData)
                 ? imageData
                 : imageData
@@ -97,6 +99,19 @@ const ProgramDetail = () => {
       loadProgram();
     }
   }, [slug]);
+
+  // Custom image renderer for markdown (same as Blog)
+  const ImageComponent = ({ src, alt }) => {
+    const fullUrl = getMediaUrl(src);
+    return (
+      <img
+        src={fullUrl}
+        alt={alt || "Program image"}
+        loading="lazy"
+        className="w-full h-auto rounded-lg my-6 shadow-md"
+      />
+    );
+  };
 
   if (loading) {
     return (
@@ -219,7 +234,7 @@ const ProgramDetail = () => {
 
       {/* Intro Section */}
       <motion.section
-        className="bg-[#FAFAFA] py-12 md:py-16"
+        className="bg-[#FAFAFA] py-12 md:py-12"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
@@ -288,7 +303,6 @@ const ProgramDetail = () => {
             className="relative max-w-5xl w-full max-h-[95vh] flex items-center justify-center"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Close button */}
             <button
               type="button"
               className="absolute top-3 right-3 text-white/80 hover:text-white text-2xl font-semibold"
@@ -297,7 +311,6 @@ const ProgramDetail = () => {
               ×
             </button>
 
-            {/* Prev arrow */}
             {galleryItems.length > 1 && (
               <button
                 type="button"
@@ -312,7 +325,6 @@ const ProgramDetail = () => {
               </button>
             )}
 
-            {/* Next arrow */}
             {galleryItems.length > 1 && (
               <button
                 type="button"
@@ -327,7 +339,6 @@ const ProgramDetail = () => {
               </button>
             )}
 
-            {/* Image */}
             <motion.div
               key={galleryItems[activeImageIndex]?.id}
               initial={{ opacity: 0, scale: 0.97 }}
@@ -356,7 +367,7 @@ const ProgramDetail = () => {
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-10">
               <h2 className="font-playfair text-2xl md:text-3xl text-[#1A1A1A] mb-3">
-                What Weve Achieved
+                What We've Achieved
               </h2>
               <p className="text-[#555] text-base md:text-lg max-w-2xl mx-auto">
                 Real impact, measured through the lives touched by this program.
@@ -390,7 +401,7 @@ const ProgramDetail = () => {
         </section>
       )}
 
-      {/* Full Story */}
+      {/* Full Story - NOW WITH MARKDOWN SUPPORT */}
       <motion.section
         className="bg-white py-12 md:py-16 border-t border-[#E5E7EB]"
         initial={{ opacity: 0, y: 20 }}
@@ -398,15 +409,45 @@ const ProgramDetail = () => {
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.6 }}
       >
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="font-playfair text-2xl md:text-3xl text-[#111827] mb-6 text-center md:text-left">
-            Program Story
-          </h2>
+        <div className="w-full md:w-[80%] mx-auto px-4 sm:px-6 lg:px-8">
           {attrs.longDescription || attrs.content ? (
-            <div
-              className="prose prose-lg max-w-none text-[#333] leading-relaxed"
-              dangerouslySetInnerHTML={{ __html: attrs.longDescription || attrs.content }}
-            />
+            <div className="prose prose-lg max-w-none">
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                components={{
+                  img: ImageComponent,
+                  h2: ({ node, ...props }) => (
+                    <h2 className="text-3xl font-playfair font-bold text-[#1A1A1A] mt-8 mb-4" {...props} />
+                  ),
+                  h3: ({ node, ...props }) => (
+                    <h3 className="text-2xl font-playfair font-bold text-[#1A1A1A] mt-6 mb-3" {...props} />
+                  ),
+                  p: ({ node, ...props }) => (
+                    <p className="text-[#333] text-lg leading-relaxed mb-4" {...props} />
+                  ),
+                  ul: ({ node, ...props }) => (
+                    <ul className="list-disc list-inside text-[#333] mb-4 space-y-2" {...props} />
+                  ),
+                  ol: ({ node, ...props }) => (
+                    <ol className="list-decimal list-inside text-[#333] mb-4 space-y-2" {...props} />
+                  ),
+                  blockquote: ({ node, ...props }) => (
+                    <blockquote className="border-l-4 border-[#0A5E55] pl-4 italic text-[#555] my-4" {...props} />
+                  ),
+                  a: ({ node, ...props }) => (
+                    <a className="text-[#0A5E55] hover:text-[#084c44] underline transition-colors" {...props} />
+                  ),
+                  code: ({ node, inline, ...props }) =>
+                    inline ? (
+                      <code className="bg-gray-200 px-2 py-1 rounded text-sm font-mono text-[#1F2937]" {...props} />
+                    ) : (
+                      <code className="block bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto font-mono text-sm my-4" {...props} />
+                    ),
+                }}
+              >
+                {attrs.longDescription || attrs.content}
+              </ReactMarkdown>
+            </div>
           ) : (
             <p className="text-lg text-[#4B5563] leading-relaxed">
               Detailed information about this program will be published soon.
@@ -499,7 +540,7 @@ const ProgramDetail = () => {
                     className="bg-white rounded-2xl p-6 shadow-sm border border-[#E5E7EB] flex flex-col h-full"
                   >
                     <p className="text-sm md:text-base text-[#374151] italic mb-4">
-                      {t.quote}
+                      {t.quote}
                     </p>
                     <div className="mt-auto flex items-center gap-3">
                       {photoUrl && (

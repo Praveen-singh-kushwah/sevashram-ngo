@@ -140,11 +140,6 @@ const ProgramsGrid = () => {
             title: program.title || 'Untitled Program',
             slug: program.slug || 'untitled-program',
             description: program.shortDescription || 'Learn more about this program and how you can help.',
-            highlights: program.highlights || [
-                'Making a difference',
-                'Community impact',
-                'Your support matters'
-            ],
             imageUrl: imageUrl
         };
     };
