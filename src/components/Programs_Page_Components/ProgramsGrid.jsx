@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { BookOpen, Home, Heart, Users, Shield, GraduationCap } from 'lucide-react';
+import { fetchPrograms } from '../../utils/api';
 
 const ProgramsGrid = () => {
     const [programs, setPrograms] = useState([]);
@@ -162,7 +163,7 @@ const ProgramsGrid = () => {
     }
 
     return (
-        <section className="py-16 md:py-24 bg-[#F7F9FB] overflow-hidden">
+        <section id="programs-list" className="py-16 md:py-24 bg-[#F7F9FB] overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Section Header */}
                 <motion.div
@@ -272,12 +273,16 @@ const ProgramsGrid = () => {
                     </div>
                 )}
 
-                {/* Load More Button (if needed in the future) */}
-                {programs.length > 0 && (
+                {/* Load More Button - Currently shows all programs, button can be removed or implemented with pagination */}
+                {false && programs.length > 0 && (
                     <div className="text-center mt-12">
-                        <button className="px-8 py-3 bg-[#1E4E79] hover:bg-[#163A57] text-white rounded-lg font-medium transition-colors duration-300">
+                        <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="px-8 py-3 bg-[#1E4E79] hover:bg-[#163A57] text-white rounded-lg font-medium transition-colors duration-300"
+                        >
                             Load More Programs
-                        </button>
+                        </motion.button>
                     </div>
                 )}
             </div>

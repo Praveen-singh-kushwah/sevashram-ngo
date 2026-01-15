@@ -136,7 +136,7 @@ const StoriesSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
             ref={scrollContainerRef}
-            className="flex items-center justify-center gap-6 overflow-x-auto scrollbar-hide scroll-smooth pb-4"
+            className="flex items-center justify-start gap-6 overflow-x-auto scrollbar-hide scroll-smooth pb-4 pl-4 lg:pl-16"
             style={{
               scrollbarWidth: 'none',
               msOverflowStyle: 'none',

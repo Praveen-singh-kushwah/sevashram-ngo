@@ -33,7 +33,23 @@ const Header = () => {
     { name: "Contact", path: "/contact" },
   ];
 
-  const isActive = (path) => location.pathname === path;
+  const isActive = (path) => {
+    // For home route, only exact match
+    if (path === "/") {
+      return location.pathname === path;
+    }
+    // For "Get Involved", also highlight on donate, volunteer, and partner pages
+    if (path === "/get-involved") {
+      return (
+        location.pathname === path ||
+        location.pathname.startsWith("/donate") ||
+        location.pathname === "/volunteer" ||
+        location.pathname === "/partner"
+      );
+    }
+    // For other routes, match exact path or paths starting with path + "/"
+    return location.pathname === path || location.pathname.startsWith(path + "/");
+  };
 
   return (
     <motion.header
@@ -41,7 +57,7 @@ const Header = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
       className={`
-        bg-white fixed w-full z-50 transition-all duration-300
+        bg-white fixed w-full z-50 transition-al  l duration-300
         ${isScrolled
           ? "shadow-lg py-3"
           : "shadow-md py-4"

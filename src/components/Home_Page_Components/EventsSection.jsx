@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Calendar, MapPin, Users } from 'lucide-react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const EventsSection = () => {
   // Animation variants
@@ -159,6 +159,7 @@ const EventsSection = () => {
 
 // Event Card Component
 const EventCard = ({ event, variants }) => {
+  const navigate = useNavigate();
   const IconComponent = event.icon;
 
   return (
@@ -208,6 +209,7 @@ const EventCard = ({ event, variants }) => {
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
+          onClick={() => navigate(event.link || '/gallery')}
           className="w-full bg-[#F9A826] text-white font-poppins font-semibold px-5 py-2.5 rounded-lg hover:bg-[#F59E0B] transition-all duration-300"
         >
           View Details

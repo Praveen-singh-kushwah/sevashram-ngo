@@ -1,6 +1,9 @@
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const CTASection = () => {
+  const navigate = useNavigate();
+  
   // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -132,8 +135,8 @@ const CTASection = () => {
             variants={containerVariants}
           >
             {/* Primary Button - Donate Now */}
-            <motion.a
-              href="/donate"
+            <motion.button
+              onClick={() => navigate('/donate')}
               custom={0}
               variants={buttonVariants}
               whileHover={{
@@ -147,11 +150,11 @@ const CTASection = () => {
               }}
             >
               Donate Now
-            </motion.a>
+            </motion.button>
 
             {/* Secondary Button - Become a Volunteer */}
-            <motion.a
-              href="/volunteer"
+            <motion.button
+              onClick={() => navigate('/volunteer')}
               custom={1}
               variants={buttonVariants}
               whileHover={{
@@ -167,7 +170,7 @@ const CTASection = () => {
               }}
             >
               Become a Volunteer
-            </motion.a>
+            </motion.button>
           </motion.div>
 
           {/* Optional: Pulsing Glow Effect on Primary Button */}

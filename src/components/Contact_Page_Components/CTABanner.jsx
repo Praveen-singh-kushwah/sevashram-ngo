@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const CTABanner = () => {
+  const navigate = useNavigate();
   return (
     <section className="relative w-full bg-gradient-to-r from-[#F9A826] to-[#FDE68A] overflow-hidden shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
       {/* Optional Background Pattern - Subtle decorative elements */}
@@ -63,6 +65,7 @@ const CTABanner = () => {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.98 }}
+            onClick={() => navigate('/volunteer')}
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className="
               bg-white text-[#F9A826] 
@@ -85,6 +88,7 @@ const CTABanner = () => {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.98 }}
+            onClick={() => navigate('/donate')}
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className="
               bg-transparent border-2 border-white text-white

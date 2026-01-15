@@ -1,8 +1,22 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { Users, GraduationCap, Activity, Calendar } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const ProgramsHeroSection = () => {
+  const navigate = useNavigate();
+  
+  const handleExplorePrograms = () => {
+    const programsSection = document.getElementById('programs-list');
+    if (programsSection) {
+      programsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  const handleSupportProgram = () => {
+    navigate('/volunteer');
+  };
+
   const stats = [
     {
       id: 1,
@@ -95,25 +109,25 @@ const ProgramsHeroSection = () => {
             transition={{ delay: 0.25, duration: 0.7, ease: "easeOut" }}
             className="flex flex-col sm:flex-row gap-4 sm:gap-5 mb-10"
           >
-            <motion.a
-              href="#programs-list"
+            <motion.button
+              onClick={handleExplorePrograms}
               whileHover={{ scale: 1.04, boxShadow: "0 14px 35px rgba(0,0,0,0.35)" }}
               whileTap={{ scale: 0.97 }}
               transition={{ duration: 0.25, ease: "easeOut" }}
               className="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-[#F9B248] text-[#1E293B] font-heading font-semibold text-sm sm:text-base shadow-[0_10px_28px_rgba(0,0,0,0.35)] hover:bg-[#F9A826] transition-colors duration-200"
             >
               Explore All Programs
-            </motion.a>
+            </motion.button>
 
-            <motion.a
-              href="#support-programs"
+            <motion.button
+              onClick={handleSupportProgram}
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.97 }}
               transition={{ duration: 0.25, ease: "easeOut" }}
               className="inline-flex items-center justify-center px-8 py-3.5 rounded-full border border-white/70 text-white font-heading font-semibold text-sm sm:text-base bg-white/5 hover:bg-white/10 backdrop-blur-sm transition-colors duration-200"
             >
               Support a Program
-            </motion.a>
+            </motion.button>
           </motion.div>
 
           {/* Impact counters */}

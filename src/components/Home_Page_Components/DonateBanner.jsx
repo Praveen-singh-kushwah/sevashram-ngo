@@ -1,8 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Heart, Smile } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const DonateBanner = () => {
+  const navigate = useNavigate();
   return (
     <section className="relative bg-gradient-to-r from-[#F9A826] to-[#FDE68A] overflow-hidden">
       {/* Optional overlay for subtle shine */}
@@ -72,6 +74,7 @@ const DonateBanner = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={() => navigate('/donate')}
               className="group relative w-full sm:w-auto bg-white text-[#F9A826] font-poppins font-semibold text-base px-8 py-3.5 rounded-lg hover:bg-[#FFF1C2] transition-all duration-300 shadow-lg hover:shadow-xl uppercase tracking-wide overflow-hidden"
             >
               <span className="relative z-10 flex items-center justify-center gap-2">
@@ -82,15 +85,16 @@ const DonateBanner = () => {
               <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
             </motion.button>
 
-            {/* Secondary Button - Sponsor a Child */}
+            {/* Secondary Button - Become a Volunteer */}
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={() => navigate('/volunteer')}
               className="group relative w-full sm:w-auto bg-transparent border-2 border-white text-white font-poppins font-semibold text-base px-8 py-3.5 rounded-lg hover:bg-white/15 transition-all duration-300 shadow-md hover:shadow-lg uppercase tracking-wide overflow-hidden"
             >
               <span className="relative z-10 flex items-center justify-center gap-2">
                 <Smile className="w-5 h-5" />
-                Sponsor a Child
+                Become a Volunteer
               </span>
               {/* Hover shimmer effect */}
               <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>

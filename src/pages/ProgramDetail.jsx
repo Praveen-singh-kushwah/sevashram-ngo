@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -13,6 +13,7 @@ import {
 
 const ProgramDetail = () => {
   const { slug } = useParams();
+  const navigate = useNavigate();
   const [program, setProgram] = useState(null);
   const [relatedPrograms, setRelatedPrograms] = useState([]);
   const [galleryItems, setGalleryItems] = useState([]);
@@ -191,7 +192,7 @@ const ProgramDetail = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="font-playfair text-3xl md:text-4xl lg:text-5xl font-semibold mb-3"
+            className="font-playfair text-3xl md:text-4 xl lg:text-5xl font-semibold mb-3"
           >
             {attrs.title}
           </motion.h1>
@@ -219,15 +220,18 @@ const ProgramDetail = () => {
             transition={{ duration: 0.6, delay: 0.35 }}
             className="flex flex-wrap items-center justify-center gap-4"
           >
-            <button className="px-6 md:px-8 py-2.5 rounded-full bg-[#0A5E55] text-sm md:text-base font-medium shadow-lg shadow-black/30 hover:bg-[#084c44] transition-colors">
+            <button 
+              onClick={() => navigate('/donate')}
+              className="px-6 md:px-8 py-2.5 rounded-full bg-[#0A5E55] text-sm md:text-base font-medium shadow-lg shadow-black/30 hover:bg-[#084c44] transition-colors"
+            >
               Donate Now
             </button>
-            <a
-              href="#impact"
+            <button
+              onClick={() => navigate('/impact')}
               className="px-6 md:px-8 py-2.5 rounded-full border border-white/70 text-sm md:text-base font-medium hover:bg-white hover:text-[#111827] transition-colors"
             >
               See Impact
-            </a>
+            </button>
           </motion.div>
         </div>
       </section>

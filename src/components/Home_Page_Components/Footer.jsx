@@ -197,26 +197,6 @@ const Footer = () => {
               })}
             </div>
 
-            {/* Newsletter Signup (Optional) */}
-            <div>
-              <p className="font-open-sans text-sm text-[#E2E8F0] mb-3">
-                Subscribe to our newsletter
-              </p>
-              <div className="flex flex-col sm:flex-row gap-2">
-                <input
-                  type="email"
-                  placeholder="Your email"
-                  className="flex-1 px-4 py-2 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:border-[#FDE68A] transition-colors duration-300 text-sm"
-                />
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-6 py-2 bg-[#F9A826] text-white font-poppins font-semibold text-sm rounded-lg hover:bg-[#F59E0B] transition-all duration-300"
-                >
-                  Subscribe
-                </motion.button>
-              </div>
-            </div>
           </motion.div>
         </motion.div>
 

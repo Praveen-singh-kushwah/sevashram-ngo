@@ -114,7 +114,7 @@ const StoryHero = ({ story }) => {
         animate="visible"
         className="relative z-10 h-full flex items-center"
       >
-        <div className="max-w-7xl mx-auto px-6 md:px-12 w-full">
+        <div className="max-w-7xl mt-8 mx-auto px-6 md:px-12 w-full">
           <motion.div
             variants={contentVariants}
             className="max-w-[650px]"
@@ -146,9 +146,9 @@ const StoryHero = ({ story }) => {
             {/* Title */}
             <motion.h1
               variants={titleVariants}
-              className="font-playfair font-bold text-white mb-6 leading-tight tracking-tight"
+              className="font-playfair font-bold text-white leading-tight tracking-tight"
               style={{
-                fontSize: 'clamp(32px, 5vw, 56px)',
+                fontSize: 'clamp(22px, 5vw, 36px)',
                 textShadow: '0px 2px 16px rgba(0,0,0,0.4)',
                 letterSpacing: '-0.5px'
               }}
@@ -160,7 +160,7 @@ const StoryHero = ({ story }) => {
             {quote && (
               <motion.blockquote
                 variants={quoteVariants}
-                className="font-playfair italic text-white/85 text-xl md:text-2xl mb-4 max-w-[550px] leading-relaxed"
+                className="font-playfair italic text-white/85 text-xl md:text-2xl mt-4 max-w-[550px] leading-relaxed"
                 style={{ letterSpacing: '1px' }}
               >
                 <div className="flex items-start">

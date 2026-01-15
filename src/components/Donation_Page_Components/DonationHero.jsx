@@ -1,8 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Heart, Shield, Lock } from 'lucide-react';
+import { useSearchParams } from "react-router-dom";
 
 const DonationHero = () => {
+
+  const [searchParams] = useSearchParams();
+  const donationRef = searchParams.get("ref");
+
   // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -100,6 +105,23 @@ const DonationHero = () => {
             </div>
           </motion.div>
         </motion.div>
+        {donationRef && (
+          <motion.div
+            variants={itemVariants}
+            className="mt-10"
+          >
+            <button
+              onClick={() => {
+                const url = `${import.meta.env.VITE_STRAPI_URL}/api/donations/${donationRef}/invoice`;
+                window.open(url, "_blank");
+              }}
+              className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full font-semibold transition shadow-lg hover:shadow-xl"
+            >
+              ⬇ Download Invoice
+            </button>
+          </motion.div>
+        )}
+
       </div>
     </section>
   );

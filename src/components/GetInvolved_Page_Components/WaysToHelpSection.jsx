@@ -74,7 +74,7 @@ const WaysToHelpSection = () => {
   ];
 
   return (
-    <section className="pt-12 pb-20 px-4 sm:px-6 lg:px-8 bg-white">
+    <section id="ways-to-help" className="pt-12 pb-20 px-4 sm:px-6 lg:px-8 bg-white">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <motion.div

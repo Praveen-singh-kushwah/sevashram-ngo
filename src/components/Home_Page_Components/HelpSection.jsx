@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Heart, UserPlus, Smile } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const HelpSection = () => {
   // Animation variants
@@ -53,10 +54,10 @@ const HelpSection = () => {
     {
       id: 3,
       icon: Smile,
-      title: 'Sponsor a Child',
-      description: "Empower a child's future by supporting their complete education and care.",
-      buttonText: 'Sponsor Now',
-      link: '/sponsor',
+      title: 'Partner With Us',
+      description: "Collaborate with us through CSR initiatives, employee engagement, and skill-based partnerships to drive measurable change.",
+      buttonText: 'Join Us',
+      link: '/partner',
       color: '#F9A826'
     }
   ];
@@ -117,6 +118,7 @@ const HelpSection = () => {
 
 // Help Card Component
 const HelpCard = ({ option, variants }) => {
+  const navigate = useNavigate();
   const IconComponent = option.icon;
 
   return (
@@ -155,6 +157,7 @@ const HelpCard = ({ option, variants }) => {
       <motion.button
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
+        onClick={() => navigate(option.link)}
         className="w-full bg-[#F9A826] text-white font-poppins font-semibold px-6 py-3 rounded-lg hover:bg-[#F59E0B] transition-all duration-300 uppercase tracking-wide shadow-md hover:shadow-lg"
       >
         {option.buttonText}

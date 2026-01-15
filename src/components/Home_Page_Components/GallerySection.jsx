@@ -3,8 +3,10 @@ import { motion } from 'framer-motion';
 import { Eye, Play } from 'lucide-react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import { useNavigate } from 'react-router-dom';
 
 const GallerySection = () => {
+  const navigate = useNavigate();
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -150,6 +152,7 @@ const GallerySection = () => {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            onClick={() => navigate('/gallery')}
             className="inline-flex items-center gap-2 bg-[#F9A826] text-white font-poppins font-semibold px-8 py-3 rounded-lg hover:bg-[#F59E0B] transition-all duration-300 shadow-md hover:shadow-lg"
           >
             View Full Gallery

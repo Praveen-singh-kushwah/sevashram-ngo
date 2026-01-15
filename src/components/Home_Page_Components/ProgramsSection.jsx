@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, BookOpen, GraduationCap, Heart, Shield, Users } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { fetchHomePrograms } from '../../utils/api';
 import { getMediaUrl } from '../../utils/api';
 
 const ProgramsSection = () => {
-
+  const navigate = useNavigate();
   const [programs, setPrograms] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -153,10 +153,15 @@ const ProgramsSection = () => {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="text-center"
         >
-          <button className="inline-flex items-center gap-2 bg-[#F9A826] text-white font-poppins font-semibold px-8 py-4 rounded-full hover:bg-[#E09616] transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl">
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => navigate('/programs')}
+            className="inline-flex items-center gap-2 bg-[#F9A826] text-white font-poppins font-semibold px-8 py-4 rounded-full hover:bg-[#E09616] transition-all duration-300 shadow-lg hover:shadow-xl"
+          >
             View All Programs
             <ArrowRight className="w-5 h-5" />
-          </button>
+          </motion.button>
         </motion.div>
       </div>
     </section>
@@ -192,7 +197,10 @@ const ProgramCard = ({ program, variants }) => {
         </p>
 
         {/* Learn More Link */}
-        <Link className="inline-flex items-center gap-2 text-[#F9A826] font-poppins font-medium text-sm group-hover:gap-3 transition-all duration-300">
+        <Link 
+          to={slug ? `/programs/${slug}` : '/programs'}
+          className="inline-flex items-center gap-2 text-[#F9A826] font-poppins font-medium text-sm group-hover:gap-3 transition-all duration-300"
+        >
           <span className="relative">
             Learn More
             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#F9A826] group-hover:w-full transition-all duration-300"></span>

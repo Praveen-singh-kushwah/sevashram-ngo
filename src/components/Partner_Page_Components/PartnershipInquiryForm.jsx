@@ -223,17 +223,6 @@ const PartnershipInquiryForm = () => {
               />
             </div>
 
-            {/* Optional Fields Toggle */}
-            <div className="text-center">
-              <button
-                type="button"
-                onClick={() => setShowOptional(!showOptional)}
-                className="text-[#F9A826] font-medium hover:underline"
-              >
-                {showOptional ? "Hide" : "Add more details"} (optional)
-              </button>
-            </div>
-
             {/* Submit Button */}
             <div className="text-center pt-6">
               <motion.button

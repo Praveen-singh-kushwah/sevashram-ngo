@@ -1,8 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const HeroSection = () => {
+  const navigate = useNavigate();
+  
   // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -221,6 +224,13 @@ const HeroSection = () => {
 
           <motion.div variants={itemVariants}>
             <motion.button
+              onClick={() => {
+                // Scroll to the WaysToHelpSection on the same page
+                const section = document.getElementById('ways-to-help');
+                if (section) {
+                  section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              }}
               className="bg-[#0EA5E9] hover:bg-[#0284C7] text-white font-semibold text-lg px-8 py-4 rounded-xl transition-all duration-300 flex items-center group"
               variants={buttonVariants}
               initial="hidden"
