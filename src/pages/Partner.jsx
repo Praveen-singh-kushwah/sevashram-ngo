@@ -16,6 +16,7 @@ const Partner = () => {
             transition={{ duration: 0.6 }}
             className="min-h-screen bg-gray-50"
         >
+
             {/* Hero Section - Introduction / Purpose */}
             <PartnerHeroSection />
 

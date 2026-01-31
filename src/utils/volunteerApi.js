@@ -7,7 +7,7 @@ export const STRAPI_BASE_URL = import.meta.env.VITE_STRAPI_URL;
  */
 
 export async function fetchVolunteerOpportunities() {
-    const url = new URL(`${STRAPI_BASE_URL}/volunteer-opportunities`);
+    const url = new URL(`${STRAPI_BASE_URL}/api/volunteer-opportunities`);
     url.searchParams.set("populate", "icon");
     url.searchParams.set("sort[0]", "order:asc");
 
@@ -26,7 +26,7 @@ export async function fetchVolunteerOpportunities() {
  */
 export async function submitVolunteerRegistration(formData) {
     const res = await fetch(
-        `${STRAPI_BASE_URL}/volunteer-registrations`,
+        `${STRAPI_BASE_URL}/api/volunteer-registrations`,
         {
             method: "POST",
             headers: {

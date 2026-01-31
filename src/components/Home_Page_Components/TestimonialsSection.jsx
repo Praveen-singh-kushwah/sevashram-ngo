@@ -102,6 +102,8 @@ const TestimonialsSection = () => {
       try {
         const res = await fetchTestimonials();
 
+        console.log("Fetched testimonials:", res.data);
+
         const formatted = res.data.map((item) => ({
           id: item.id,
           quote: item.quote,

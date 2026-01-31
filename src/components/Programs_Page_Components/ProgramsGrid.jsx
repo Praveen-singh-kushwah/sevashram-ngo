@@ -58,7 +58,7 @@ const ProgramsGrid = () => {
     useEffect(() => {
         const fetchPrograms = async () => {
             try {
-                const response = await fetch('http://localhost:1337/programs?populate=*');
+                const response = await fetch(`${import.meta.env.VITE_STRAPI_URL}/api/programs?populate=*`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch programs');
                 }
@@ -128,7 +128,7 @@ const ProgramsGrid = () => {
 
         // If cover exists and has a direct url property
         if (cover?.url) {
-            imageUrl = `http://localhost:1337${cover.url}`;
+            imageUrl = `${import.meta.env.VITE_STRAPI_URL + '/api/' + cover.url}`;
             console.log("image url : " , imageUrl)
         }
         // Fallback to default image if no cover or url found
