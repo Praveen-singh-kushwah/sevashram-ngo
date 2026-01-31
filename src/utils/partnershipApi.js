@@ -5,7 +5,7 @@ const STRAPI_BASE_URL = import.meta.env.VITE_STRAPI_URL;
 ----------------------------------------- */
 export async function submitPartnershipInquiry(formData) {
   const res = await fetch(
-    `${STRAPI_BASE_URL}/api/partnership-inquiries`,
+    `${STRAPI_BASE_URL}/partnership-inquiries`,
     {
       method: "POST",
       headers: {

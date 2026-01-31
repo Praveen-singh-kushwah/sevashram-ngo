@@ -58,7 +58,7 @@ const ProgramsGrid = () => {
     useEffect(() => {
         const fetchPrograms = async () => {
             try {
-                const response = await fetch('http://localhost:1337/api/programs?populate=*');
+                const response = await fetch('http://localhost:1337/programs?populate=*');
                 if (!response.ok) {
                     throw new Error('Failed to fetch programs');
                 }

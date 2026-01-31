@@ -4,7 +4,7 @@ const STRAPI_BASE_URL = import.meta.env.VITE_STRAPI_URL;
    Submit donor details (already used)
 ----------------------------------------- */
 export async function submitDonorDetails(formData) {
-  const res = await fetch(`${STRAPI_BASE_URL}/api/donations`, {
+  const res = await fetch(`${STRAPI_BASE_URL}/donations`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -37,7 +37,7 @@ export async function submitDonorDetails(formData) {
 ----------------------------------------- */
 export async function fetchDonationByRef(documentId) {
   const res = await fetch(
-    `${STRAPI_BASE_URL}/api/donations/${documentId}`
+    `${STRAPI_BASE_URL}/donations/${documentId}`
   );
 
   if (!res.ok) {
@@ -52,7 +52,7 @@ export async function fetchDonationByRef(documentId) {
 ----------------------------------------- */
 export async function updateDonationPayment(documentId, payload) {
   const res = await fetch(
-    `${STRAPI_BASE_URL}/api/donations/${documentId}`,
+    `${STRAPI_BASE_URL}/donations/${documentId}`,
     {
       method: "PUT",
       headers: {
@@ -81,7 +81,7 @@ export async function updateDonationPayment(documentId, payload) {
    Create Razorpay Order (backend)
 ----------------------------------------- */
 export async function createRazorpayOrder({ donationRef, amount }) {
-  const res = await fetch(`${STRAPI_BASE_URL}/api/donations/create-razorpay-order`, {
+  const res = await fetch(`${STRAPI_BASE_URL}/donations/create-razorpay-order`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -102,7 +102,7 @@ export async function createRazorpayOrder({ donationRef, amount }) {
    Verify Razorpay Payment (backend)
 ----------------------------------------- */
 export async function verifyRazorpayPayment(paymentDetails) {
-  const res = await fetch(`${STRAPI_BASE_URL}/api/donations/verify-payment`, {
+  const res = await fetch(`${STRAPI_BASE_URL}/donations/verify-payment`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(paymentDetails),

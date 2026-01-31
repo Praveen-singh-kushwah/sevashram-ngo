@@ -61,7 +61,7 @@
 
         const donationRef = response?.data?.documentId;
 
-        navigate(`/donate/payment?ref=${donationRef}`);
+        navigate(`/donate/payment?ref=${donationRef}`);   
       } catch (error) {
         console.error("Donation submission failed:", error);
         alert("Something went wrong. Please try again.");

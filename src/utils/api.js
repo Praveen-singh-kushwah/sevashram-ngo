@@ -1,7 +1,7 @@
 export const STRAPI_BASE_URL = import.meta.env.VITE_STRAPI_URL;
 
 export async function fetchEvents({ page = 1, pageSize = 9 } = {}) {
-  const url = new URL(`${STRAPI_BASE_URL}/api/events`);
+  const url = new URL(`${STRAPI_BASE_URL}/events`);
   url.searchParams.set("populate", "cover");
   url.searchParams.set("sort[0]", "date:desc");
   url.searchParams.set("pagination[page]", String(page));
@@ -16,7 +16,7 @@ export async function fetchEvents({ page = 1, pageSize = 9 } = {}) {
 }
 
 export async function fetchEventBySlug(slug) {
-  const url = new URL(`${STRAPI_BASE_URL}/api/events`);
+  const url = new URL(`${STRAPI_BASE_URL}/events`);
   url.searchParams.set("filters[slug][$eq]", slug);
   url.searchParams.set("populate[event_images][populate]", "Image");
   url.searchParams.set("populate", "cover");
@@ -31,7 +31,7 @@ export async function fetchEventBySlug(slug) {
 
 // Program gallery images via separate collection (fetch all, filter by id on frontend)
 export async function fetchProgramImages() {
-  const url = new URL(`${STRAPI_BASE_URL}/api/program-images`);
+  const url = new URL(`${STRAPI_BASE_URL}/program-images`);
   url.searchParams.set("populate", "image");
 
   const res = await fetch(url.toString());
@@ -44,7 +44,7 @@ export async function fetchProgramImages() {
 
 // Programs API - list (for grids and related programs)
 export async function fetchPrograms({ page = 1, pageSize = 12 } = {}) {
-  const url = new URL(`${STRAPI_BASE_URL}/api/programs`);
+  const url = new URL(`${STRAPI_BASE_URL}/programs`);
   url.searchParams.set("pagination[page]", String(page));
   url.searchParams.set("pagination[pageSize]", String(pageSize));
   url.searchParams.set("fields[0]", "title");
@@ -62,7 +62,7 @@ export async function fetchPrograms({ page = 1, pageSize = 12 } = {}) {
 
 // Program detail by slug (full detail)
 export async function fetchProgramBySlug(slug) {
-  const url = new URL(`${STRAPI_BASE_URL}/api/programs`);
+  const url = new URL(`${STRAPI_BASE_URL}/programs`);
   url.searchParams.set("filters[slug][$eq]", slug);
   // Use full populate to avoid 400 errors and include cover + program_images
   url.searchParams.set("populate", "*");
@@ -77,7 +77,7 @@ export async function fetchProgramBySlug(slug) {
 
 // Home Programs API (only selected programs)
 export async function fetchHomePrograms({ limit = 4 } = {}) {
-  const url = new URL(`${STRAPI_BASE_URL}/api/programs`);
+  const url = new URL(`${STRAPI_BASE_URL}/programs`);
 
   url.searchParams.set("populate", "cover");
   url.searchParams.set("filters[showOnHome][$eq]", "true");
@@ -98,7 +98,7 @@ export async function fetchHomePrograms({ limit = 4 } = {}) {
 
 // Story Images API functions - for the grid page
 export async function fetchStoryImages({ page = 1, pageSize = 9 } = {}) {
-  const url = new URL(`${STRAPI_BASE_URL}/api/story-images`);
+  const url = new URL(`${STRAPI_BASE_URL}/story-images`);
   // Populate all relations (image, story, etc.)
   url.searchParams.set("populate", "*");
   url.searchParams.set("sort[0]", "createdAt:desc");
@@ -114,7 +114,7 @@ export async function fetchStoryImages({ page = 1, pageSize = 9 } = {}) {
 }
 
 export async function fetchHomeStories({ limit = 5 } = {}) {
-  const url = new URL(`${STRAPI_BASE_URL}/api/story-images`);
+  const url = new URL(`${STRAPI_BASE_URL}/story-images`);
 
   url.searchParams.set("populate", "*");
   url.searchParams.set("filters[showOnHome][$eq]", "true");
@@ -132,7 +132,7 @@ export async function fetchHomeStories({ limit = 5 } = {}) {
 
 // Team Members API
 export async function fetchTeamMembers() {
-  const url = new URL(`${STRAPI_BASE_URL}/api/team-members`);
+  const url = new URL(`${STRAPI_BASE_URL}/team-members`);
 
   url.searchParams.set("populate", "photo");
   url.searchParams.set("filters[isActive][$eq]", true);
@@ -151,7 +151,7 @@ export async function fetchTeamMembers() {
 
 // Impact Stories API functions - for individual story details
 export async function fetchImpactStories({ page = 1, pageSize = 9 } = {}) {
-  const url = new URL(`${STRAPI_BASE_URL}/api/impact-stories`);
+  const url = new URL(`${STRAPI_BASE_URL}/impact-stories`);
   url.searchParams.set("populate", "*");
   url.searchParams.set("sort[0]", "createdAt:desc");
   url.searchParams.set("pagination[page]", String(page));
@@ -166,7 +166,7 @@ export async function fetchImpactStories({ page = 1, pageSize = 9 } = {}) {
 }
 
 export async function fetchImpactStoryBySlug(slug) {
-  const url = new URL(`${STRAPI_BASE_URL}/api/impact-stories`);
+  const url = new URL(`${STRAPI_BASE_URL}/impact-stories`);
   url.searchParams.set("filters[slug][$eq]", slug);
   url.searchParams.set("populate", "*");
 
@@ -188,7 +188,7 @@ export function getMediaUrl(path) {
 export async function fetchBlogList({ page = 1, pageSize = 9 } = {}) {
   // Build URL with exact format that works with your Strapi - NO leading spaces
   const queryString = `fields[0]=Title&fields[1]=Slug&fields[2]=shortDescription&fields[3]=authorName&populate[coverCard][populate]=*&pagination[page]=${page}&pagination[pageSize]=${pageSize}`;
-  const url = `${STRAPI_BASE_URL}/api/blogs?${queryString}`;
+  const url = `${STRAPI_BASE_URL}/blogs?${queryString}`;
 
   const res = await fetch(url);
 
@@ -200,7 +200,7 @@ export async function fetchBlogList({ page = 1, pageSize = 9 } = {}) {
 }
 
 export async function fetchBlogBySlug(slug) {
-  const url = new URL(`${STRAPI_BASE_URL}/api/blogs`);
+  const url = new URL(`${STRAPI_BASE_URL}/blogs`);
   url.searchParams.set("filters[Slug][$eq]", slug);
   url.searchParams.set("populate", "*");
 
