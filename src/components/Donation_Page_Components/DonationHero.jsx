@@ -111,7 +111,7 @@ const DonationHero = () => {
             >
               <button
                 onClick={() => {
-                  const url = `${import.meta.env.VITE_STRAPI_URL}/donations/${donationRef}/invoice`;
+                  const url = `${import.meta.env.VITE_STRAPI_URL}/api/donations/${donationRef}/invoice`;
                   window.open(url, "_blank");
                 }}
                 className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full font-semibold transition shadow-lg hover:shadow-xl"

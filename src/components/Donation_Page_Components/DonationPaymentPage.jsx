@@ -33,7 +33,7 @@ const DonationPaymentPage = () => {
         if (!data) throw new Error("Donation not found");
 
         if (data.paymentStatus === "paid") {
-          navigate(`/donate/success?ref=${donationRef}`);
+          navigate(`api/donate/success?ref=${donationRef}`);
           return;
         }
 
