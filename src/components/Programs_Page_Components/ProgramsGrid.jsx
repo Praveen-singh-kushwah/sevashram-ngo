@@ -68,48 +68,6 @@ const ProgramsGrid = () => {
                 console.error('Error fetching programs:', err);
                 setError('Failed to load programs. Please try again later.');
                 // Fallback data in case API fails
-                setPrograms([
-                    {
-                        id: 1,
-                        attributes: {
-                            title: 'Child Education Program',
-                            slug: 'child-education',
-                            shortDescription: 'Providing quality education to underprivileged children in the Tamasha community.',
-                            highlights: [
-                                '100+ children enrolled',
-                                'Daily classes and tutoring',
-                                'School supplies provided'
-                            ],
-                            cover: {
-                                data: {
-                                    attributes: {
-                                        url: '/images/programs/education.jpg'
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    {
-                        id: 2,
-                        attributes: {
-                            title: 'Healthcare Initiative',
-                            slug: 'healthcare',
-                            shortDescription: 'Ensuring access to basic healthcare and nutrition for children and families.',
-                            highlights: [
-                                'Monthly health camps',
-                                'Nutrition programs',
-                                'Vaccination drives'
-                            ],
-                            cover: {
-                                data: {
-                                    attributes: {
-                                        url: '/images/programs/healthcare.jpg'
-                                    }
-                                }
-                            }
-                        }
-                    }
-                ]);
             } finally {
                 setLoading(false);
             }
@@ -128,8 +86,7 @@ const ProgramsGrid = () => {
 
         // If cover exists and has a direct url property
         if (cover?.url) {
-            imageUrl = `${import.meta.env.VITE_STRAPI_URL + '/api/' + cover.url}`;
-            console.log("image url : " , imageUrl)
+            imageUrl = `${import.meta.env.VITE_STRAPI_URL + cover.url}`;
         }
         // Fallback to default image if no cover or url found
         else {
@@ -192,8 +149,6 @@ const ProgramsGrid = () => {
                     >
                         {programs.map((program, index) => {
                             const formattedProgram = formatProgramData(program);
-
-                            console.log(program)
 
                             return (
                                 <motion.div
